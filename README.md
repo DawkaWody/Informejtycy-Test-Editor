@@ -50,8 +50,8 @@ May change in the future"
 
 
 ## Screenshots
-![Zrzut ekranu 2025-03-02 185417.png](readme_screenshots/Zrzut%20ekranu%202025-03-02%20185417.png)
-![Zrzut ekranu 2025-03-02 182936.png](readme_screenshots/Zrzut%20ekranu%202025-03-02%20182936.png)
-![Zrzut ekranu 2025-03-02 185456.png](readme_screenshots/Zrzut%20ekranu%202025-03-02%20185456.png)
-![Zrzut ekranu 2025-03-02 185513.png](readme_screenshots/Zrzut%20ekranu%202025-03-02%20185513.png)
-![Zrzut ekranu 2025-03-02 185529.png](readme_screenshots/Zrzut%20ekranu%202025-03-02%20185529.png)
+![Screenshot 1](readme_screenshots/Screenshot%202025-03-02%20185417.png)
+![Screenshot 2](readme_screenshots/Screenshot%202025-03-02%20182936.png)
+![Screenshot 3](readme_screenshots/Screenshot%202025-03-02%20185456.png)
+![Screenshot 4](readme_screenshots/Screenshot%202025-03-02%20185513.png)
+![Screenshot 5](readme_screenshots/Screenshot%202025-03-02%20185529.png)
