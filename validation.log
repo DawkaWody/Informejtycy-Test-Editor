@@ -1,8 +1,1 @@
-====PACK: D:/Repositories/GitHub/Informejtycy-Checker/tests/1-15-5.test====
-Exception('Number of input files must match the number of output files.')
-====PACK: D:/Repositories/GitHub/Informejtycy-Checker/tests/1-02-4.test====
-{'time_limit': 1, 'memory_limit': 128}
-[(b'6\n', b'42\n'), (b'8\n', b'46\n'), (b'0\n', b'32\n'), (b'189\n', b'372\n'), (b'253\n', b'487\n'), (b'980\n', b'1796\n'), (b'617632\n', b'1111769\n'), (b'547139\n', b'984882\n'), (b'454471\n', b'818079\n'), (b'68080\n', b'122576\n')]
-====PACK: tests/suma-n-liczb.test====
-{'time_limit': 3, 'memory_limit': 64}
-[(b'4\n1 2 3 4', b'10'), (b'1\n1', b'1')]
+
