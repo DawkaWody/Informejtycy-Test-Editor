@@ -1,5 +1,6 @@
 import webbrowser
 import os.path
+import importlib.util
 import requests
 from zipfile import ZipFile, ZIP_DEFLATED
 from shutil import move, copy
@@ -160,7 +161,6 @@ def validate_pack(app):
 	if not os.path.exists('pack_loader.py'):
 		# Clone the file from checker repo
 		cloning_popup = LoadingPopup(app, "Cloning pack loader from GitHub")
-		print("clonign")
 		with open("pack_loader.py", 'w') as file:
 			c = requests.get('https://raw.githubusercontent.com/DawkaWody/Informejtycy-Checker/refs/heads/main/src/code_checking/pack_loader.py').content
 			file.write(c.decode('utf-8'))
@@ -172,27 +172,36 @@ def validate_pack(app):
 					file.write("	def __init__(self, logger, pack_dir: str, pack_extension: str, in_name: str, out_name: str, config_name: str):\n")
 				elif line.strip("\n") != "from logger import Logger":
 					file.write(line)
-		print("end")
 		cloning_popup.destroy()
 
-	pack_loader = __import__('pack_loader', globals(), locals(), ['PackLoader'])
-	copy(app.file_explorer.current_pack, 'validation')
-	pl = pack_loader.PackLoader(None, 'validation', '.test', 'in', 'out', 'CONFIG')
+	# pack_loader = __import__('pack_loader', globals(), locals(), ['PackLoader'])
+	module_path = os.path.join(os.getcwd(), "pack_loader.py")
+	if os.path.exists(module_path):
+		spec = importlib.util.spec_from_file_location('pack_loader', module_path)
+		module = importlib.util.module_from_spec(spec)
+		spec.loader.exec_module(module)
+		PackLoader = module.PackLoader
 
-	try:
-		tests = pl.load_bytes(0)
-		config = pl.load_config(0)
-	except Exception as e:
+		copy(app.file_explorer.current_pack, 'validation')
+		pl = PackLoader(None, 'validation', '.test', 'in', 'out', 'CONFIG')
+
+		try:
+			tests = pl.load_bytes(0)
+			config = pl.load_config(0)
+		except Exception as e:
+			os.remove(f"validation/{os.path.basename(app.file_explorer.current_pack)}")
+			with open('validation.log', 'w') as log:
+				log.writelines([f"====PACK: {app.file_explorer.current_pack}====\n", repr(e) + "\n"])
+			messagebox.showerror("Pack validation", "Error: " + str(e))
+			return
+
 		os.remove(f"validation/{os.path.basename(app.file_explorer.current_pack)}")
-		with open('validation.log', 'w') as log:
-			log.writelines([f"====PACK: {app.file_explorer.current_pack}====\n", repr(e) + "\n"])
-		messagebox.showerror("Pack validation", "Error: " + str(e))
-		return
+		messagebox.showinfo("Pack validation", "Pack is valid and ready to use")
+		with open('validation.log', 'a') as log:
+			log.writelines([f"====PACK: {app.file_explorer.current_pack}====\n", str(config) + "\n", str(tests) + "\n"])
 
-	os.remove(f"validation/{os.path.basename(app.file_explorer.current_pack)}")
-	messagebox.showinfo("Pack validation", "Pack is valid and ready to use")
-	with open('validation.log', 'a') as log:
-		log.writelines([f"====PACK: {app.file_explorer.current_pack}====\n", str(config) + "\n", str(tests) + "\n"])
+	else:
+		raise ModuleNotFoundError("pack_loader not found")
 
 def open_test_dir(app):
 	run(f"explorer {os.path.abspath("tests")}")
