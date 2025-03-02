@@ -205,7 +205,7 @@ def open_log(app):
 	run("notepad validation.log")
 
 def version(app):
-	messagebox.showinfo("About", "Informejtycy Test Editor v1.0")
+	messagebox.showinfo("About", "Informejtycy Test Editor v1.1")
 
 def open_github(app):
 	webbrowser.open('https://github.com/DawkaWody/Informejtycy-Test-Editor')

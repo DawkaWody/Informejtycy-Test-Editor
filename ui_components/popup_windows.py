@@ -5,6 +5,7 @@ class InputPopup(tk.Toplevel):
         super().__init__(parent)
         self.title(title)
         self.geometry("270x120")
+        self.iconbitmap("icon.ico")
 
         self.result = ()  # Stores input values
 
@@ -19,7 +20,9 @@ class InputPopup(tk.Toplevel):
         self.entry2.grid(row=1, column=1, padx=5, pady=5)
 
         # Buttons
-        tk.Button(self, text="OK", command=self.on_ok).grid(row=2, column=0, columnspan=2, pady=10)
+        btn = tk.Button(self, text="OK", command=self.on_ok)
+        btn.configure(bg="#007acc", fg="white", font=("Arial", 10, "bold"))
+        btn.grid(row=2, column=0, columnspan=2, pady=10)
 
         self.transient(parent)  # Make popup modal
         self.grab_set()  # Disable interactions with main window until closed
@@ -35,6 +38,7 @@ class LoadingPopup(tk.Toplevel):
         super().__init__(parent)
         self.title(title)
         self.geometry("270x120")
+        self.iconbitmap("icon.ico")
         self.resizable(False, False)
 
         tk.Label(self, text=message, font=("Arial", 12)).pack(pady=20)

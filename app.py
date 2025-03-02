@@ -1,5 +1,6 @@
-import tkinter as tk
 import zipfile
+import tkinter as tk
+from tkinter import ttk
 
 from menu_commands import COMMANDS
 from ui_components.menu_bar import create_menu
@@ -11,6 +12,7 @@ class TestEditorApp(tk.Tk):
         super().__init__()
         self.title("Informejtycy Test Editor")
         self.geometry("800x600")
+        self.iconbitmap("icon.ico")
 
         # Create menu
         create_menu(self, COMMANDS)
@@ -22,6 +24,12 @@ class TestEditorApp(tk.Tk):
         self.right_frame = None
         self.main_display = None
         self.create_widgets()
+
+        self.style = ttk.Style()
+        self.style.theme_use("clam")
+        self.configure(bg="#2b2b2b")  # Dark background
+        self.right_frame.configure(bg="#3c3f41")
+        self.file_explorer.configure(bg="#3c3f41")
 
         self.changes_buffer = {}
         self.current_test = None
